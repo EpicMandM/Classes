@@ -10,7 +10,7 @@ namespace Classes
     {
         public string WeaponType { get; set; }
         public string WeaponKind { get; set; }
-        public int Ammo { get; set; }
+        public virtual int Ammo { get; set; }
 
         public Weapon(string weaponType, string weaponKind, int ammo)
         {
@@ -23,9 +23,21 @@ namespace Classes
         {
             Ammo--;
         }
+        public void AddAmmo(int count) => Ammo += count;
     }
     class M590 : Weapon
-    {   
+    {
+        public override int Ammo { get => base.Ammo; 
+            set {
+                    base.Ammo = value;
+                if (base.Ammo < 0)
+                {
+                    Console.WriteLine("Out of ammo!");
+                    Ammo = default;
+                }
+
+            } 
+        }
         public M590(int ammo) : base("Shotgun", "Combat weapon", ammo)
         {
 
