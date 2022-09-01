@@ -10,6 +10,8 @@ namespace Classes
     {
         class Engine
         {
+            private bool _isDefective;
+
             public int Power { get; }
             public int Speed { get; }
             public int Torque { get; }
@@ -19,10 +21,23 @@ namespace Classes
                 Power = power;
                 Speed = speed;
                 Torque = torque;
+
+                _isDefective = IsDefective();
             }
-            public void Start()
+            private bool IsDefective()
             {
+                Random random = new();
+                return random.Next(2) == 1;
+            }
+            public bool Start()
+            {
+                if(_isDefective)
+                {
+                    Console.WriteLine("Engine hasn't been started...");
+                    return false;
+                }
                 Console.WriteLine("Engine has been started!");
+                return true;
             }
         }
         private Engine CarEngine { get; }
@@ -39,9 +54,9 @@ namespace Classes
 
         public void Go()
         {
-            CarEngine.Start();
-            Console.WriteLine("The car is moving...");
-        }
+            if(CarEngine.Start())
+                Console.WriteLine("The car is moving...");
+        }   
     }
    
 }

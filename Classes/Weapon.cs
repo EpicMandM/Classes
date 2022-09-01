@@ -8,8 +8,11 @@ namespace Classes
 {
     abstract class Weapon
     {
-        public string WeaponType { get; set; }
-        public string WeaponKind { get; set; }
+        private string weaponType;
+        private string weaponKind;
+
+        public string WeaponType { get => weaponType; set => weaponType = value; }
+        public string WeaponKind { get => weaponKind; set => weaponKind = value; }
         public virtual int Ammo { get; set; }
 
         public Weapon(string weaponType, string weaponKind, int ammo)
@@ -45,7 +48,7 @@ namespace Classes
         public override void Shoot()
         {
             Ammo--;
-            Console.WriteLine("Shotgun shoot!");
+            Console.WriteLine("Shotgun has shot!");
         }
     }
 }
